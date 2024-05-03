@@ -3,30 +3,46 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Building ..."
-            }
-            post {
-                always {
-                    mail to: "elijahjudd05@gmail.com",
-                    subject: "Build Status Email", 
-                    body: "Build log attached" 
-                }
+                // Use Maven to build the code
             }
         }
-        stage("Test") {
+        stage('Unit and Integration Tests') {
             steps {
-                echo "Testing ..."
+                // Use tools like JUnit for unit tests and Selenium for integration tests
             }
         }
-        stage("Deploy") {
+        stage('Code Analysis') {
             steps {
-                echo "Deploying ..."
+                // Integrate a code analysis tool like SonarQube
             }
         }
-        stage("Complete") {
+        stage('Security Scan') {
             steps {
-                echo "Completed."
+                // Perform security scanning using tools like OWASP ZAP or SonarQube
             }
+        }
+        stage('Deploy to Staging') {
+            steps {
+                // Deploy the application to a staging server (e.g., AWS EC2) using tools like Ansible or Jenkins Deploy Plugin
+            }
+        }
+        stage('Integration Tests on Staging') {
+            steps {
+                // Run integration tests on the staging environment
+            }
+        }
+        stage('Deploy to Production') {
+            steps {
+                // Deploy the application to production server (e.g., AWS EC2) using tools like Ansible or Jenkins Deploy Plugin
+            }
+        }
+    }
+    post {
+        success {
+            // Send notification email for successful pipeline execution
+        }
+        failure {
+            // Send notification email for failed pipeline execution
         }
     }
 }
